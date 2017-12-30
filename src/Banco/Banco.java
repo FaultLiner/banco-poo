@@ -1,6 +1,6 @@
 package Banco;
 
-import Bolsa.Empresa;
+
 import ExcepcionesPropias.*;
 import Utilidades.Input;
 import Utilidades.Output;
@@ -14,6 +14,7 @@ public class Banco {
     private String nombre;
     private AgenteDeInversiones broker;
     private HashSet<Cliente> clientes;
+    private GestorDeInversiones gestor;
     //FIN ZONA VARIABLES
 
     //ZONA CONSTRUCTORES
@@ -69,6 +70,9 @@ public class Banco {
         this.broker = broker;
     }
 
+    public void setGestor(GestorDeInversiones gestor) {
+        this.gestor = gestor;
+    }
 
     //FIN ZONA SETTERS
 
@@ -121,8 +125,8 @@ public class Banco {
     public void showClientes() {
         if (clientes.size() == 0) System.out.println("No hay clientes en la banco!");
         else {
-                System.out.println(clientes.toString());
-            }
+            System.out.println(clientes.toString());
+        }
     }
 
     /*Nombre método: copiaSeguridadBanco
@@ -132,7 +136,7 @@ public class Banco {
       Descripción: Serializa la informacion de los clientes que hay en el banco y los transforma en un fichero binario
       */
 
-    public void copiaSeguridadBanco(String path, Output serializa)throws IOException {
+    public void copiaSeguridadBanco(String path, Output serializa) throws IOException {
 
         serializa.abrir(path);
         Iterator iterador = clientes.iterator();
@@ -151,7 +155,7 @@ public class Banco {
       Excepciones: IOException y ClassNotFoundException
       Descripción: Deserializa la información de las empresas presentes en la bolsa y las uarda en disco
       */
-    public void restaurarCopiaSeguridadClientes(String path, Input deserializa)throws IOException, ClassNotFoundException {
+    public void restaurarCopiaSeguridadClientes(String path, Input deserializa) throws IOException, ClassNotFoundException {
         Cliente cliente;
         deserializa.abrir(path);
         System.out.println("Restaurando...");
@@ -211,8 +215,43 @@ public class Banco {
 
     }
 
+    /*Nombre método: recomendacionDeInversion
+          Entradas: dni cliente
+          Salidas: String nombreEmpresa
+          Excepciones:
+          Descripción: Compara la valoración de todas las empresas y selecciona la que mejor desempeño ha tenido
+          */
+    public void recomendacionDeInversion(String dniCliente) {
+        Cliente cliente = new Cliente("Markos", dniCliente, 10);
+        boolean encontrado = false;
+        if (clientes.contains(cliente)) {
+            Iterator iterador = clientes.iterator();
+            Cliente cliente1 = null;
+            while (iterador.hasNext() && !encontrado) {
 
+                cliente1 = (Cliente) iterador.next();
+                if (cliente1.equals(cliente)) {
+                    encontrado = true;
+                }
+            }
 
+            if (!cliente1.isEsPremium()) {
+                System.out.println("El cliente no es Premium");
+            } else {
+                String nombreGestorRecomendacion = gestor.consultaDeInversiones();
+                if (nombreGestorRecomendacion!="1"){
+                    System.out.println("Actualización finalizada con éxito");
+                    System.out.println("El nombre de la empresa que mayor variación ha tenido es: " + gestor.consultaDeInversiones());
 
+                 }
+            }
+        } else {
+            System.out.println("El cliente no existe");
 
+        }
+    }
 }
+
+
+
+

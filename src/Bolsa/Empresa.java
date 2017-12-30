@@ -41,11 +41,15 @@ public class Empresa implements Serializable{
 
 
     public float calculaVariacion()  {
-        return (valorTituloActual-valorTituloPrevio)*100;
+
+        if(valorTituloPrevio == 0){
+            return 0;
+        }
+        return ((valorTituloActual-valorTituloPrevio)/valorTituloPrevio)*100;
     }
 
     public String toString(){
-        return "Nombre Empresa: "+this.nombre + "  |||| Valor Actual Título: "+this.valorTituloActual +"  |||| Variación: "+ this.calculaVariacion()+ " %" +"\n";
+        return "Nombre Empresa: "+this.nombre + "  |||| Valor Actual Título: "+  this.valorTituloActual +"  |||| Variación: "+  this.calculaVariacion()+ " %" +"\n";
     }
 
 

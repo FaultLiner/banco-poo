@@ -21,6 +21,8 @@ public class Main {
             Banco banco = new Banco ("Banco Bilbao Vizcaya");//Creamos un banco
             AgenteDeInversiones broker = new AgenteDeInversiones("Jhon Templeton","123456789");//Creamo un objeto de tipo AgenteDeInversion
             banco.setBroker(broker);//Se lo asignamos al banco
+            GestorDeInversiones gestor = new GestorDeInversiones("Elon James", "123456785", bolsa);
+            banco.setGestor(gestor);
 
 
             Simulador simula = new Simulador(interfazUsusario,bolsa,banco); // Creamos un objeto de tipo Simulador y utilizamos el constructor que recibe como parmatros de entrada un objeto de tipo InterfazDeUsuario y un objeto de tipo BolsaDeValores9

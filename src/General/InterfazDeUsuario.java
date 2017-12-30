@@ -97,121 +97,140 @@ public class InterfazDeUsuario {
         char letraMenu1;
         intentos = INTENTOS;
         datos = leeTeclado.leeDatos();
-        if (opcion.equals("opcionNombre")) {
-            while (intentos > 1) {
-                encontrado = false;
-                i = 0;
-                while (!encontrado && i < datos.length()) {
-                    letraNombre = datos.charAt(i);
-                    if (!(((letraNombre >= 65) && (letraNombre <= 90)) || ((letraNombre >= 97) && (letraNombre <= 122)))) {
-                        encontrado = true;
-                    }
-                    i = i + 1;
-                }
-                if (encontrado) {
-                    System.out.println("El nombre debe contener caracteres válidos; no números, no acentos, solo letras desde a-z o A-Z ");
-                    intentos = intentos - 1;
-                    System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                    System.out.print("Nombre empresa: ");
-                    datos = leeTeclado.leeDatos();
 
-                } else {
-                    return datos;
-                }
-            }
-        }else if (opcion.equals("opcionMenu")) {
-            while (intentos > 1) {
-                if (datos.length() >2 ){//el numero e caracteres es distinto de 1 y 2
-                    intentos = intentos - 1;
-                    System.out.println();
-                    System.out.println("ERROR: La opcion debe contener 1 o 2 caracteres numéricos como máximo.");
-                    System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                    System.out.print("Inserte la opción deseada: ");
-                    datos = leeTeclado.leeDatos();
-                } else {
-                    if (datos.length() == 1) {
-                        letraMenu = datos.charAt(0);
-                        if (!(letraMenu >= 48 && letraMenu <= 57)) {
-                            intentos = intentos - 1;
-                            System.out.println();
-                            System.out.println("ERROR: La opcion debe contener solo caracteres numéricos válidos 0-18.");
-                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                            System.out.print("Inserte la opción deseada: ");
-                            datos = leeTeclado.leeDatos();
+            if (opcion.equals("opcionNombre")) {
+                while (intentos > 1) {
+                    try {
+                        encontrado = false;
+                        i = 0;
+                        while (!encontrado && i < datos.length()) {
+                            letraNombre = datos.charAt(i);
+                            if (!(((letraNombre >= 65) && (letraNombre <= 90)) || ((letraNombre >= 97) && (letraNombre <= 122)))) {
+                                encontrado = true;
+                            }
+                            i = i + 1;
                         }
-                        else return datos;
+                        if (encontrado) {
+                            System.out.println("El nombre debe contener caracteres válidos; no números, no acentos, solo letras desde a-z o A-Z ");
+                            intentos = intentos - 1;
+                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                            System.out.print("Nombre empresa: ");
+                            datos = leeTeclado.leeDatos();
 
-                    }
-                    else{//hay dos carateres
-                        letraMenu = datos.charAt(0);
-                        letraMenu1 = datos.charAt(0);
-                        if (!(letraMenu >= 48 && letraMenu <= 57) || !(letraMenu1 >= 48 && letraMenu1 <= 57) ) {
-                            intentos = intentos - 1;
-                            System.out.println();
-                            System.out.println("ERROR: Alguno de los caracteres que ha introducido no es numérico");
-                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                            System.out.print("Inserte la opción deseada: ");
-                            datos = leeTeclado.leeDatos();
+                        } else {
+                            return datos;
                         }
-                        else {
-                            int aux;
-                            aux = Integer.parseInt(datos);
-                            if (aux !=10&&aux !=11&&aux !=12&&aux !=13&&aux !=14&&aux !=15&&aux !=16&&aux !=17&&aux !=18){
+                    } catch (StringIndexOutOfBoundsException siobe) {
+                        System.out.println("ERROR: El dni debe contener 9 caracteres.");
+                    }
+                }
+                } else if (opcion.equals("opcionMenu")) {
+                    while (intentos > 1) {
+                        try {
+                            if (datos.length() > 2) {//el numero e caracteres es distinto de 1 y 2
                                 intentos = intentos - 1;
                                 System.out.println();
-                                System.out.println("ERROR: El numero introducido debes tesar dentro del rango 0-18");
+                                System.out.println("ERROR: La opcion debe contener 1 o 2 caracteres numéricos como máximo.");
                                 System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
                                 System.out.print("Inserte la opción deseada: ");
                                 datos = leeTeclado.leeDatos();
-                            }
-                            else return datos;
+                            } else {
+                                if (datos.length() == 1) {
+                                    letraMenu = datos.charAt(0);
+                                    if (!(letraMenu >= 48 && letraMenu <= 57)) {
+                                        intentos = intentos - 1;
+                                        System.out.println();
+                                        System.out.println("ERROR: La opcion debe contener solo caracteres numéricos válidos 0-18.");
+                                        System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                                        System.out.print("Inserte la opción deseada: ");
+                                        datos = leeTeclado.leeDatos();
+                                    } else return datos;
 
+                                } else {//hay dos carateres
+                                    letraMenu = datos.charAt(0);
+                                    letraMenu1 = datos.charAt(0);
+                                    if (!(letraMenu >= 48 && letraMenu <= 57) || !(letraMenu1 >= 48 && letraMenu1 <= 57)) {
+                                        intentos = intentos - 1;
+                                        System.out.println();
+                                        System.out.println("ERROR: Alguno de los caracteres que ha introducido no es numérico");
+                                        System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                                        System.out.print("Inserte la opción deseada: ");
+                                        datos = leeTeclado.leeDatos();
+                                    } else {
+                                        int aux;
+                                        aux = Integer.parseInt(datos);
+                                        if (aux != 10 && aux != 11 && aux != 12 && aux != 13 && aux != 14 && aux != 15 && aux != 16 && aux != 17 && aux != 18) {
+                                            intentos = intentos - 1;
+                                            System.out.println();
+                                            System.out.println("ERROR: El numero introducido debes tesar dentro del rango 0-18");
+                                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                                            System.out.print("Inserte la opción deseada: ");
+                                            datos = leeTeclado.leeDatos();
+                                        } else return datos;
+
+                                    }
+                                }
+
+                            }
                         }
+                        catch (StringIndexOutOfBoundsException siobe){
+                            System.out.println("ERROR: Opcion incorrecta. Se debe introducir una opción válida (0-18) ");
+                            System.out.println();
+                            System.out.print("Inserte la opción deseada: ");
+                            datos = leeTeclado.leeDatos();
+                        }
+                    }
+
+            } else if (opcion.equals("opcionDNI")) {
+                while (intentos > 1) {
+                    try {
+                        if (datos.length() != 9) {//el numero e caracteres es distinto de 9
+                            intentos = intentos - 1;
+                            System.out.println();
+                            System.out.println("ERROR: El dni debe contener 9 caracteres.");
+                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                            System.out.print("Dni cliente: ");
+                            datos = leeTeclado.leeDatos();
+                        }
+                        return datos;
+                    }
+                    catch (StringIndexOutOfBoundsException siobe ){
+                        System.out.println("ERROR: El dni debe contener 9 caracteres.");
+                    }
+                }
+
+            } else if (opcion.equals("opcionPath")) {
+                while (intentos > 1) {
+                    try {
+                        encontrado = false;
+                        i = 0;
+                        while (!encontrado && i < datos.length()) {
+                            letraNombre = datos.charAt(i);
+                            if (!((letraNombre == 46) || ((letraNombre >= 65) && (letraNombre <= 90)) || ((letraNombre >= 97) && (letraNombre <= 122)))) {
+                                encontrado = true;
+                            }
+                            i = i + 1;
+                        }
+                        if (encontrado) {
+                            System.out.println("El nombre debe contener caracteres válidos; no números, no acentos, solo letras desde a-z o A-Z y símbolo de puntuación '.'");
+                            intentos = intentos - 1;
+                            System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                            System.out.print("Nombre empresa: ");
+                            datos = leeTeclado.leeDatos();
+
+                        } else {
+                            return datos;
+                        }
+                    }
+                    catch (StringIndexOutOfBoundsException siobe){
+                        System.out.println("ERROR: El dni debe contener 9 caracteres.");
                     }
 
                 }
             }
+            throw new IntentsLimitAchieveException("Se ha superado el límite de veces que el usuario puede introducir una opción no válida");
         }
 
-        else if (opcion.equals("opcionDNI")) {
-            while (intentos > 1) {
-                if (datos.length() != 9) {//el numero e caracteres es distinto de 9
-                    intentos = intentos - 1;
-                    System.out.println();
-                    System.out.println("ERROR: El dni debe contener 9 caracteres.");
-                    System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                    System.out.print("Dni cliente: ");
-                    datos = leeTeclado.leeDatos();
-                }
-                return datos;
-            }
-
-        } else if (opcion.equals("opcionPath")) {
-        while (intentos > 1) {
-            encontrado = false;
-            i = 0;
-            while (!encontrado && i < datos.length()) {
-                letraNombre = datos.charAt(i);
-                if (!((letraNombre==46)||((letraNombre >= 65) && (letraNombre <= 90)) || ((letraNombre >= 97) && (letraNombre <= 122)))) {
-                    encontrado = true;
-                }
-                i = i + 1;
-            }
-            if (encontrado) {
-                System.out.println("El nombre debe contener caracteres válidos; no números, no acentos, solo letras desde a-z o A-Z y símbolo de puntuación '.'");
-                intentos = intentos - 1;
-                System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                System.out.print("Nombre empresa: ");
-                datos = leeTeclado.leeDatos();
-
-            } else {
-                return datos;
-            }
-
-        }
-        }
-        throw new IntentsLimitAchieveException("Se ha superado el límite de veces que el usuario puede introducir una opción no válida");
-    }
 
     /*Nombre método: leeNumeroDecimalTeclado
       Entradas: ninguna
@@ -220,23 +239,25 @@ public class InterfazDeUsuario {
       Descripción: utiliza el objeto escaner de la clase para leer de teclado un número. Si el número es no positivo y se superan el límite de intentos se lanza una excepción.
       */
     private float leeNumeroDecimalTeclado() throws IntentsLimitAchieveException {
-        float numero;
-        int intentos;
-        intentos = INTENTOS;
-        while (intentos > 1) {
-            numero = Float.valueOf(leeTeclado.leeDatos()).floatValue();
-            if (numero < 0) {
-                intentos = intentos - 1;
-                System.out.println("El numero debe ser mayor o igual que cero;  no números negativos");
-                System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
-                System.out.print("Inserte valor: ");
+            float numero;
+            int intentos;
+            intentos = INTENTOS;
+            while (intentos > 1) {
+                numero = Float.valueOf(leeTeclado.leeDatos()).floatValue();
+                if (numero <= 0) {
+                    intentos = intentos - 1;
+                    System.out.println("El numero debe ser mayor que cero;  no números negativos ni cero");
+                    System.out.println("Vuelva a intentarlo. Le quedan " + intentos + " intentos para hacerlo bien.");
+                    System.out.print("Inserte valor: ");
 
+                }
+                return numero;
             }
-            return numero;
-        }
 
-        throw new IntentsLimitAchieveException("Se ha superado el límite de veces que el usuario puede introducir una opción no válida");
+            throw new IntentsLimitAchieveException("Se ha superado el límite de veces que el usuario puede introducir una opción no válida");
+
     }
+
 
     /*Nombre método: menu
       Entradas: ninguna
@@ -402,6 +423,21 @@ public class InterfazDeUsuario {
         dni = this.leeCadenaTextoTeclado("opcionDNI");
     }
 
+    /*Nombre método: consultaValores(OPCION 8)
+      Entradas: dni cliente
+      Salidas: nada
+      Excepciones:
+      Descripción: Promociona a un cleinte ya existente a premium asignandole a un gestor
+      */
+    public void consultaValores() throws IntentsLimitAchieveException{
+        System.out.println("------OPCIÓN 8 SELECCIONADA: SOLICITA RECOMEDACIÓN DE INVERSIÓN------");
+        System.out.println();
+        System.out.println("A continuación le solicitaremos los siguientes datos necesarios: ");
+        System.out.println();
+        System.out.print("Dni cliente: ");
+        dni = this.leeCadenaTextoTeclado("opcionDNI");
+    }
+
     /*Nombre método: AltaEmpresaBolsa (OPCION 9)
       Entradas: ninguna
       Salidas: ninguna
@@ -432,6 +468,18 @@ public class InterfazDeUsuario {
         System.out.println();
         System.out.print("Nombre empresa: ");
         this.nombreEmpresa = this.leeCadenaTextoTeclado("opcionNombre");
+    }
+
+    /*Nombre método: actualizaValores (OPCION 11)
+      Entradas: ninguna
+      Salidas: ninguna
+      Excepciones: IntentsLimitAchieveException
+      Descripción: cambia el valor de los atributos de la clase llamados: nombreEmpresa, através de la solicitud por teclado de datos al usuario.
+      */
+    public void actualizaValores() {
+        System.out.println("------OPCIÓN 11 SELECCIONADA: ACTUALIZA VALORES------");
+        System.out.println();
+
     }
 
     /*Nombre método: hazCopiaSeguridadBolsa(OPCION 12)

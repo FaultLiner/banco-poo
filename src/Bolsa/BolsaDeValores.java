@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.HashSet;
 import java.util.Iterator;
 import Utilidades.*;
+import General.*;
+
+import javax.swing.plaf.synth.SynthTextAreaUI;
 
 public class BolsaDeValores {
 
@@ -80,6 +83,29 @@ public class BolsaDeValores {
         else System.out.println("Empresa eliminada con exito!");
 
     }
+
+    /*Nombre método: actualizarValoresEmpresas
+      Entradas: Objeto de String, el nombre de una empresa.
+      Salidas: nada
+      Excepciones: ninguna
+      Descripción: elimina una empresa de la lista.
+      */
+    public void actualizarValoresEmpresas (){
+        HashSet<Empresa> empresas1 = new  HashSet<Empresa>();
+        Utilidades aleatorio = new Utilidades();
+        Iterator iterador = empresas.iterator();
+        while (iterador.hasNext()) {
+            Empresa empresa = (Empresa) iterador.next();
+            empresa.setValorTituloPrevio(empresa.getValorTituloActual());
+            empresa.setValorTituloActual(empresa.getValorTituloActual()+empresa.getValorTituloActual() * aleatorio.generaAleatorio());
+            empresas1.add(empresa);
+        }
+        empresas.clear();
+        empresas.addAll(empresas1);
+
+
+
+    }
     /*Nombre método: showEmpresas
       Entradas: nada
       Salidas: nada
@@ -121,7 +147,7 @@ public class BolsaDeValores {
       Descripción: Deserializa la información de las empresas presentes en la bolsa y las guarda en disco
       */
     public void restaurarCopiaSeguridadEmpresas(String path, Input deserializa)throws IOException, ClassNotFoundException {
-
+        float aux = 0;
         Empresa empresa;
         deserializa.abrir(path);
         System.out.println("Restaurando...");
@@ -133,6 +159,14 @@ public class BolsaDeValores {
         } while (empresa !=null) ;
         deserializa.cerrar();
         empresas.remove(null);
+        //Comprobamos que no hay empresas en la lista que tengan un valor de titulo actual de cero y si lo tiene la quitamos de la lista.
+        Iterator iterador = empresas.iterator();
+        while (iterador.hasNext()) {
+            Empresa empresa1 = (Empresa) iterador.next();
+            if(empresa1.getValorTituloActual() == aux){
+                empresas.remove(empresa1);
+            }
+        }
     }
 }
 
