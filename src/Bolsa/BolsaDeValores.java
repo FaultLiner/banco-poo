@@ -3,8 +3,12 @@ package Bolsa;
 import java.io.*;
 import java.util.HashSet;
 import java.util.Iterator;
+
+import Banco.Cliente;
+import Mensajes.TipoOperacion;
 import Utilidades.*;
 import General.*;
+import sun.misc.FloatingDecimal;
 
 import javax.swing.plaf.synth.SynthTextAreaUI;
 
@@ -153,12 +157,45 @@ public class BolsaDeValores {
         System.out.println("Restaurando...");
         System.out.println();
         empresas.clear();//borramos toda la lista antes de cargar desde disco la nueva lista de la que dispondremos
-        do{
-            empresa = deserializa.leerEmpresa();
-            empresas.add(empresa);
-        } while (empresa !=null) ;
-        deserializa.cerrar();
-        empresas.remove(null);
+        try {
+            do {
+                empresa = deserializa.leerEmpresa();
+                empresas.add(empresa);
+            } while (empresa != null);
+            deserializa.cerrar();
+            empresas.remove(null);
+        }
+
+
+        catch (InterruptedIOException iioe){
+            System.out.println("EEROR:Interrupcion de tipo InterruptedIOException");
+            throw new IOException();
+
+        }
+        catch (InvalidClassException | StreamCorruptedException ost){
+            System.out.println("EEROR:Interrupcion de tipo InvalidClassException");
+            throw new IOException();
+            /* Thrown when the Serialization runtime detects one of the following problems with a Class.
+                The serial version of the class does not match that of the class descriptor read from the stream
+                The class contains unknown datatypes
+                The class does not have an accessible no-arg constructor
+            */
+        } catch (ObjectStreamException ost){
+            System.out.println("EEROR:Interrupcion de tipo ObjectStreamException");
+            throw new IOException();
+
+        }
+        catch ( EOFException eofe){
+            System.out.println("EEROR:Interrupcion de tipo EOFException");
+            throw new IOException();
+
+        }
+
+        catch (IOException ioe){
+            System.out.println("EEROR:Interrupcion de tipo IOException: es decir ninguna de las capturas antes");
+            throw new IOException();
+
+        }
         //Comprobamos que no hay empresas en la lista que tengan un valor de titulo actual de cero y si lo tiene la quitamos de la lista.
         Iterator iterador = empresas.iterator();
         while (iterador.hasNext()) {
@@ -168,6 +205,403 @@ public class BolsaDeValores {
             }
         }
     }
+
+    /*Nombre método: recepcioncadenaCodificadaCompraDesdeElBroker
+      Entradas: String con la cadena codificade de compra desde el broker
+      Salidas: String con una cadena codificada de respuesta de compra con el resultado de la operación y los valores necesarios en funcion del tipo de operacion
+      Excepciones:
+      Descripción: Dada la cadena codificada recibida desde el broker realiza:  decodifica, geenera un string de respuesta codificado (para ello tiene que hacer las operaciones de mirar el precio de la accion y realizar las operaciones necesarias y por ultimo actualiza los valores de la bolsa en funcion de si la orden era de compra o de venta
+      */
+
+    public String recepcioncadenaCodificadaCompraDesdeElBroker(String cadenaCompraCodificada) {
+
+        System.out.println(" -------------- ZONA BOLSA -------------");
+        System.out.println();
+        System.out.println(" -------- La bolsa ha recibido la cadena de texto de compra codificada enviada por el broker.");
+        System.out.println();
+
+        //Variables para decodificar
+        String idOperacionDecodificado ="" ;
+        String nombreClienteDecodificado ="" ;
+        String dniClienteDecodificado = "";
+        String nombreEmpresaDecodificado = "";
+        String cantidadMaximaAInvertir = "";
+        //Variables para codificar cadena de respuesta
+        boolean efectuada;
+        double numAccionesCompradas;
+        double precioDeAccion;
+        double dineroSobrante;
+
+
+        //DECODIFICAMOS LA CADENA
+        System.out.println(" 3º) La Bolsa esta decodificando la cadena de texto codificada...");
+        System.out.println();
+        int i = 0;
+        char caracter;
+//Decodificamos el IdOperacion
+        caracter = cadenaCompraCodificada.charAt(i);
+        while (caracter != '|'){
+            idOperacionDecodificado = idOperacionDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaCompraCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el nombre del cliente
+        caracter = cadenaCompraCodificada.charAt(i);
+        while (caracter != '|'){
+            nombreClienteDecodificado = nombreClienteDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaCompraCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el DNI del cliente
+        caracter = cadenaCompraCodificada.charAt(i);
+        while (caracter != '|'){
+            dniClienteDecodificado = dniClienteDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaCompraCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el nombreEmpresa
+        caracter = cadenaCompraCodificada.charAt(i);
+        while (caracter != '|'){
+            nombreEmpresaDecodificado = nombreEmpresaDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaCompraCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el cantidadMaximaAInvertir
+        caracter = cadenaCompraCodificada.charAt(i);
+        while (caracter != '|'){
+            cantidadMaximaAInvertir = cantidadMaximaAInvertir + caracter;
+            i = i+1;
+            caracter = cadenaCompraCodificada.charAt(i);
+        }
+
+        System.out.println(" -------- La bolsa ha terminado de decodificar la cadena de texto recibida del broker.");
+        System.out.println();
+        System.out.println(" ------------ Los datos decodificados son: ");
+        System.out.println();
+        System.out.println(" ---------------- ID Operacion = "+idOperacionDecodificado);
+        System.out.println(" ---------------- Nombre Cliente = "+nombreClienteDecodificado);
+        System.out.println(" ---------------- DNI Cliente = "+dniClienteDecodificado);
+        System.out.println(" ---------------- Nombre Empresa = "+nombreEmpresaDecodificado);
+        System.out.println(" ---------------- Max. Catidad a Invertir = "+cantidadMaximaAInvertir);
+        System.out.println();
+
+        //FIN DECODIFICAR LA CADENA
+
+        System.out.println(" 4º) La bolsa esta realizando la operación de compra de acciones...");
+        System.out.println();
+
+        //primero comprobamos si la empresa de la que se intentan adquirir titulos esta en la bolsa, sino esta la operacion no se efectura
+        boolean encontrado = false;
+        Empresa empresaAComprar = new Empresa(nombreEmpresaDecodificado,1);//Solo me intera el nombre, el valor actual es cualquiera
+        Iterator iterador = empresas.iterator(); // creo un objeto Iterator para recorrer la coleccion
+        while (iterador.hasNext() && !encontrado) {
+            Empresa empresa = (Empresa) iterador.next();
+            if(empresa.equals(empresaAComprar)) {
+                empresaAComprar = empresa;
+                encontrado = true;
+            }
+        }
+
+
+
+        if(!encontrado || (empresaAComprar.getValorTituloActual()> Double.parseDouble(cantidadMaximaAInvertir)) ){ // sino la empresa no esta en la bolsa o el valor de cada accion es superior a la cantidad maxima de dinero que el cliente esta dispuesto a invertir, entonces se devuelve una cadena de respuesta codificada al broker con resultado false
+            System.out.println(" -------- La bolsa no ha podido comprar acciones porque la empresa de la que se intentan adquirir títulos no existe en la bolsa");
+            System.out.println();
+            System.out.println(" 5º) La bolsa esta codificando la cadena de texto de respuesta de compra para enviar al broker...");
+            System.out.println();
+            System.out.println(" -------- Se ha terminado de codificar la cadena.");
+            System.out.println();
+            System.out.println(" -------- La cadena de texto codificada de respuesta de compra generada por la bolsa es: "+ idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + "false" + "|");
+            System.out.println();
+
+            return idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + "false" + "|";
+        }
+
+        else{ // si la empresa esta en la bolsa entonces compramos
+            //1º Obtenemos el valor del titulo actual de la empresa para saber cuantos titulos podemos comprar
+            precioDeAccion = empresaAComprar.getValorTituloActual();
+
+
+            double maxCantidadAInvertir = Double.parseDouble(cantidadMaximaAInvertir);
+            double resto;
+
+            resto =  maxCantidadAInvertir/empresaAComprar.getValorTituloActual() - Math.floor(maxCantidadAInvertir/empresaAComprar.getValorTituloActual());
+
+            numAccionesCompradas = Math.floor(maxCantidadAInvertir/empresaAComprar.getValorTituloActual()); // auqnue numAccionesCompradas sea de tipo doule lo redondeamos al entero inferior
+
+            dineroSobrante = resto * empresaAComprar.getValorTituloActual();
+
+            System.out.println(" -------- Se ha terminado de comprar.");
+            System.out.println();
+            System.out.println(" ------------ Los datos de la compra son: ");
+            System.out.println();
+            System.out.println(" ---------------- ID Operacion = "+idOperacionDecodificado);
+            System.out.println(" ---------------- Nombre Cliente = "+nombreClienteDecodificado);
+            System.out.println(" ---------------- DNI Cliente = "+dniClienteDecodificado);
+            System.out.println(" ---------------- Nombre Empresa = "+nombreEmpresaDecodificado);
+            System.out.println(" ---------------- Número de acciones compradas "+numAccionesCompradas);
+            System.out.println(" ---------------- Precio de la acción "+precioDeAccion);
+            System.out.println(" ---------------- Dinero sobrante "+dineroSobrante);
+            System.out.println();
+
+            //2º Modificamos el valor de la accion: hacemos que suba ya que la operacion es de compra
+            System.out.println(" -------- La bolsa esta modificando el valor de la accion en la bolsa. En este caso como la operacion es de compra el valor de la acción aumentará un 1% con respecto a su valor actual");
+            System.out.println(" ------------ Valor acción en la bolsa antes de la compra = "+empresaAComprar.getValorTituloActual());
+            double valorModificado = empresaAComprar.getValorTituloActual() + (numAccionesCompradas * empresaAComprar.getValorTituloActual() * 0.01);
+            System.out.println(" ------------ Valor acción en la bolsa después de la compra = "+valorModificado);
+            System.out.println();
+
+            empresaAComprar.setValorTituloPrevio(empresaAComprar.getValorTituloActual());
+            empresaAComprar.setValorTituloActual(empresaAComprar.getValorTituloActual() + (numAccionesCompradas * empresaAComprar.getValorTituloActual() * 0.01)); //hacemos que la accion suba un 1 % del valor actual de la accion por cada accion que compramos
+
+            //3º Devolvemos a la bolsa la empresaAcomprar con los valores aumentados debido a la compra
+
+            Iterator iterador1 = empresas.iterator(); // creo un objeto Iterator para recorrer la coleccion
+            encontrado = false;
+            while (iterador.hasNext() && !encontrado) {
+                Empresa empresa = (Empresa) iterador.next();
+                if (empresa.equals(empresaAComprar)) {
+                    empresas.remove(empresa);
+                    empresas.add(empresaAComprar);
+                    encontrado = true;
+                }
+            }
+
+            System.out.println(" -------- La bolsa ha terminado de realizar la operación de compra la acciones.");
+            System.out.println();
+            System.out.println(" 5º) La bolsa esta codificando la cadena de texto de respuesta de compra para enviar al broker...");
+            System.out.println();
+            //4º DEVOLVEMOS LA CADENA CODIFICADA AL BROKER
+            System.out.println(" -------- Se ha terminado de codificar la cadena.");
+            System.out.println();
+            System.out.println(" -------- La cadena de texto codificada de respuesta de compra generada por la bolsa es: "+idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + "true"+ "|" + numAccionesCompradas + "|" + precioDeAccion+ "|" + dineroSobrante+"|");
+            System.out.println();
+            System.out.println(" 6º) La bolsa esta enviando la cadena de texto de respuesta de compra al broker...");
+            System.out.println();
+
+            return idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + "true"+ "|" + numAccionesCompradas + "|" + precioDeAccion+ "|" + dineroSobrante+"|";
+        }
+    }
+
+    /*Nombre método: recepcioncadenaCodificadaVentaDesdeElBroker
+      Entradas: String con la cadena codificada de venta desde el broker
+      Salidas: String con una cadena codificada de respuesta de venta con el resultado de la operación y los valores necesarios en funcion del tipo de operacion
+      Excepciones:
+      Descripción: Dada la cadena codificada recibida desde el broker realiza:  decodifica, geenera un string de respuesta codificado (para ello tiene que hacer las operaciones de mirar el precio de la accion y realizar las operaciones necesarias y por ultimo actualiza los valores de la bolsa en funcion de si la orden era de compra o de venta
+      */
+
+    public String recepcioncadenaCodificadaVentaDesdeElBroker(String cadenaVentaCodificada) {
+
+        System.out.println(" -------------- ZONA BOLSA -------------");
+        System.out.println();
+        System.out.println(" -------- La bolsa ha recibido la cadena de texto de venta codificada enviada por el broker.");
+        System.out.println();
+
+        //Variables para decodificar
+        String idOperacionDecodificado ="" ;
+        String nombreClienteDecodificado ="" ;
+        String dniClienteDecodificado = "";
+        String nombreEmpresaDecodificado = "";
+        String numAccionesVender = "";
+        //Variables para codificar cadena de respuesta
+        boolean efectuada;
+        double numAccionesVendidas;
+        double precioDeAccion;
+        double beneficioTotal;
+
+
+        //DECODIFICAMOS LA CADENA
+        System.out.println(" 3º) La Bolsa esta decodificando la cadena de texto codificada...");
+        System.out.println();
+        int i = 0;
+        char caracter;
+//Decodificamos el IdOperacion
+        caracter = cadenaVentaCodificada.charAt(i);
+        while (caracter != '|'){
+            idOperacionDecodificado = idOperacionDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaVentaCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el nombre del cliente
+        caracter = cadenaVentaCodificada.charAt(i);
+        while (caracter != '|'){
+            nombreClienteDecodificado = nombreClienteDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaVentaCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el DNI del cliente
+        caracter = cadenaVentaCodificada.charAt(i);
+        while (caracter != '|'){
+            dniClienteDecodificado = dniClienteDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaVentaCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el nombreEmpresa
+        caracter = cadenaVentaCodificada.charAt(i);
+        while (caracter != '|'){
+            nombreEmpresaDecodificado = nombreEmpresaDecodificado + caracter;
+            i = i+1;
+            caracter = cadenaVentaCodificada.charAt(i);
+        }
+        i = i+1;
+        //Decodificamos el cantidadTitulosAVender
+        caracter = cadenaVentaCodificada.charAt(i);
+        while (caracter != '|'){
+            numAccionesVender = numAccionesVender + caracter;
+            i = i+1;
+            caracter = cadenaVentaCodificada.charAt(i);
+        }
+
+        System.out.println(" -------- La bolsa ha terminado de decodificar la cadena de texto recibida del broker.");
+        System.out.println();
+        System.out.println(" ------------ Los datos decodificados son: ");
+        System.out.println();
+        System.out.println(" ---------------- ID Operacion = "+idOperacionDecodificado);
+        System.out.println(" ---------------- Nombre Cliente = "+nombreClienteDecodificado);
+        System.out.println(" ---------------- DNI Cliente = "+dniClienteDecodificado);
+        System.out.println(" ---------------- Nombre Empresa = "+nombreEmpresaDecodificado);
+        System.out.println(" ---------------- Número de acciones a vender = "+numAccionesVender);
+        System.out.println();
+
+
+        //FIN DECODIFICAR LA CADENA
+
+        System.out.println(" 4º) La bolsa esta realizando la operación de venta de acciones...");
+        System.out.println();
+
+        //primero comprobamos si la empresa de la que se intentan adquirir titulos esta en la bolsa, sino esta la operacion no se efectura
+        boolean encontrado = false;
+        Empresa empresaAVender = new Empresa(nombreEmpresaDecodificado,1);//Solo me intera el nombre, el valor actual es cualquiera
+        Iterator iterador = empresas.iterator(); // creo un objeto Iterator para recorrer la coleccion
+        while (iterador.hasNext() && !encontrado) {
+            Empresa empresa = (Empresa) iterador.next();
+            if(empresa.equals(empresaAVender)) {
+                empresaAVender = empresa;
+                encontrado = true;
+            }
+        }
+
+
+
+        if(!encontrado){ // si la empresa no esta en la bolsa, entonces se devuelve una cadena de respuesta codificada al broker con resultado false
+            efectuada = false;
+            System.out.println(" -------- La bolsa no ha podido vender acciones porque la empresa de la que se intentan vender títulos no existe en la bolsa");
+            System.out.println();
+            System.out.println(" 5º) La bolsa esta codificando la cadena de texto de respuesta de venta para enviar al broker...");
+            System.out.println();
+            System.out.println(" ------------ Los datos a codificar son: ");
+            System.out.println();
+            System.out.println(" ---------------- ID Operacion = " + idOperacionDecodificado+"  ---- OK");
+            System.out.println(" ---------------- Nombre Cliente = " + nombreClienteDecodificado+"  ---- OK");
+            System.out.println(" ---------------- DNI Cliente = " + dniClienteDecodificado+"  ---- OK");
+            System.out.println(" ---------------- Resultado Operación =  " + efectuada+"  ---- OK");
+            System.out.println();
+            System.out.println(" -------- Se ha terminado de codificar la cadena.");
+            System.out.println();
+            System.out.println(" -------- La cadena de texto codificada de respuesta de venta generada por la bolsa es: "+ idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + efectuada + "|");
+            System.out.println();
+            System.out.println("                                          "+ idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + efectuada + "|"+"                                          ");
+            System.out.println();
+
+
+            return idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + "false" + "|";
+        }
+
+        else{ // si la empresa esta en la bolsa entonces compramos
+            //1º Obtenemos el valor del titulo actual de la empresa para saber cuantos titulos podemos comprar
+            efectuada = true;
+
+            numAccionesVendidas = Double.parseDouble(numAccionesVender);
+
+            precioDeAccion = empresaAVender.getValorTituloActual();
+
+            beneficioTotal = numAccionesVendidas * precioDeAccion;
+
+            System.out.println(" -------- Se ha terminado de vender.");
+            System.out.println();
+            System.out.println(" ------------ Los datos de la venta son: ");
+            System.out.println();
+            System.out.println(" ---------------- ID Operacion = "+idOperacionDecodificado);
+            System.out.println(" ---------------- Nombre Cliente = "+nombreClienteDecodificado);
+            System.out.println(" ---------------- DNI Cliente = "+dniClienteDecodificado);
+            System.out.println(" ---------------- Nombre Empresa = "+nombreEmpresaDecodificado);
+            System.out.println(" ---------------- Número de acciones vendidas "+numAccionesVendidas);
+            System.out.println(" ---------------- Precio de la acción "+precioDeAccion);
+            System.out.println(" ---------------- Beneficio total venta "+beneficioTotal);
+            System.out.println();
+
+            //2º Modificamos el valor de la accion: hacemos que suba ya que la operacion es de compra
+            System.out.println(" -------- La bolsa esta modificando el valor de la accion en la bolsa. En este caso como la operacion es de venta el valor de la acción disminuira un 1% con respecto a su valor actual");
+            System.out.println();
+            System.out.println(" ------------ Valor acción en la bolsa antes de la venta = "+empresaAVender.getValorTituloActual());
+            double valorModificado = empresaAVender.getValorTituloActual() - (numAccionesVendidas * empresaAVender.getValorTituloActual() * 0.01);
+            System.out.println(" ------------ Valor acción en la bolsa después de la venta = "+valorModificado);
+            System.out.println();
+
+            empresaAVender.setValorTituloPrevio(empresaAVender.getValorTituloActual());
+            empresaAVender.setValorTituloActual(empresaAVender.getValorTituloActual() - (numAccionesVendidas * empresaAVender.getValorTituloActual() * 0.01)); //hacemos que la accion baje un 1 % del valor actual de la accion por cada accion que compramos
+            //3º Devolvemos a la bolsa la empresaAcomprar con los valores aumentados debido a la compra
+
+            Iterator iterador1 = empresas.iterator(); // creo un objeto Iterator para recorrer la coleccion
+            encontrado = false;
+            while (iterador.hasNext() && !encontrado) {
+                Empresa empresa = (Empresa) iterador.next();
+                if (empresa.equals(empresaAVender)) {
+                    empresas.remove(empresa);
+                    empresas.add(empresaAVender);
+                    encontrado = true;
+                }
+            }
+
+            System.out.println(" -------- La bolsa ha terminado de realizar la operación de venta la acciones.");
+            System.out.println();
+            System.out.println(" 5º) La bolsa esta codificando la cadena de texto de respuesta de venta para enviar al broker...");
+            System.out.println();
+            System.out.println();
+            System.out.println(" ------------ Los datos de la venta son: ");
+            System.out.println();
+            System.out.println(" ---------------- ID Operacion = "+idOperacionDecodificado+"  ---- OK");
+            System.out.println(" ---------------- Nombre Cliente = "+nombreClienteDecodificado+"  ---- OK");
+            System.out.println(" ---------------- DNI Cliente = "+dniClienteDecodificado+"  ---- OK");
+            System.out.println(" ---------------- Nombre Empresa = "+nombreEmpresaDecodificado+"  ---- OK");
+            System.out.println(" ---------------- Número de acciones vendidas "+numAccionesVendidas+"  ---- OK");
+            System.out.println(" ---------------- Precio de la acción "+precioDeAccion+"  ---- OK");
+            System.out.println(" ---------------- Beneficio total venta "+beneficioTotal+"  ---- OK");
+            //4º DEVOLVEMOS LA CADENA CODIFICADA AL BROKER
+            System.out.println(" -------- Se ha terminado de codificar la cadena.");
+            System.out.println();
+            System.out.println(" -------- La cadena de texto codificada de respuesta de venta generada por la bolsa es: "+idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + efectuada+ "|" + numAccionesVendidas + "|" + precioDeAccion+ "|" + beneficioTotal+"|");
+            System.out.println();
+            System.out.println("                                                                "+idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + efectuada+ "|" + numAccionesVendidas + "|" + precioDeAccion+ "|" + beneficioTotal+"|");
+            System.out.println();
+            System.out.println(" 6º) La bolsa esta enviando la cadena de texto de respuesta de venta al broker...");
+            System.out.println();
+
+            return idOperacionDecodificado + "|" + nombreClienteDecodificado + "|" + dniClienteDecodificado + "|" + efectuada+ "|" + numAccionesVendidas + "|" + precioDeAccion+ "|" + beneficioTotal+"|";
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+    }
+
+
+
 }
 
 

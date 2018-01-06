@@ -1,25 +1,50 @@
 package Mensajes;
 
-import Utilidades.Utilidades;
+import General.Utilidades;
+
 
 public class MensajeRespuestaCompra extends MensajeCompra {
-    private boolean operacionRealizada;
-    private int numAccionesCompradas;
+    private boolean efectuada;
+    private double numAccionesCompradas;
     private double precioDeAccion;
     private double dineroSobrante;
 
-    public MensajeRespuestaCompra(int identificador, String nombreCliente, boolean operacionRealizada, int numAccionesCompradas, double precioDeAccion, double dineroSobrante) {
-        super(identificador, nombreCliente);
-        this.operacionRealizada = operacionRealizada;
+    public MensajeRespuestaCompra(int idOperacion, String nombreCliente, String dniCliente,String nombreEmpresa, TipoOperacion tipoOperacion, boolean efectuada, double numAccionesCompradas, double precioDeAccion, double dineroSobrante) {
+        super(idOperacion, nombreCliente, dniCliente,nombreEmpresa, tipoOperacion);
+        this.efectuada = efectuada;
         this.numAccionesCompradas = numAccionesCompradas;
         this.precioDeAccion = precioDeAccion;
         this.dineroSobrante = dineroSobrante;
     }
-
-    private String cadenaOperacionRealizada() {
-        return String.valueOf(this.operacionRealizada);
+    public MensajeRespuestaCompra(int idOperacion, String nombreCliente, String dniCliente, String nombreEmpresa, TipoOperacion tipoOperacion, boolean efectuada) {
+        super(idOperacion, nombreCliente, dniCliente, nombreEmpresa, tipoOperacion);
+        this.efectuada = efectuada;
     }
 
+    public MensajeRespuestaCompra(int idOperacion, String nombreCliente, String dniCliente,TipoOperacion tipoOperacion, double cantidadMaximaAInvertir, boolean efectuada) {
+        super(idOperacion, nombreCliente, dniCliente,tipoOperacion,cantidadMaximaAInvertir);
+        this.efectuada = efectuada;
+    }
+
+    public boolean isEfectuada() {
+        return efectuada;
+    }
+
+    public double getNumAccionesCompradas() {
+        return numAccionesCompradas;
+    }
+
+    public double getPrecioDeAccion() {
+        return precioDeAccion;
+    }
+
+    public double getDineroSobrante() {
+        return dineroSobrante;
+    }
+
+    private String cadenaOperacionRealizada() {
+        return String.valueOf(this.efectuada);
+    }
     private String cadenaNumAccionesCompradas() {
         return Utilidades.formatoEntero(this.numAccionesCompradas);
     }
@@ -33,6 +58,7 @@ public class MensajeRespuestaCompra extends MensajeCompra {
     }
 
     public String codificar() {
-        return cadenaIdentificador() + "|" + nombreCliente + "|" + cadenaOperacionRealizada() + "|" + cadenaNumAccionesCompradas() + "|" + cadenaPrecioDeAccion() + "|" + cadenaDineroSobrante();
+        if (efectuada) return this.idOperacion + "|" + this.nombreCliente + "|" + this.dniCliente + "|" + this.cadenaOperacionRealizada()+ "|" + this.cadenaNumAccionesCompradas() + "|" + this.cadenaPrecioDeAccion()+ "|" + this.cadenaDineroSobrante()+"|";
+        else return this.idOperacion + "|" + this.nombreCliente + "|" + this.dniCliente + "|" + this.cadenaOperacionRealizada() + "|"+ "La empresa no existe en la bolsa"+"|";
     }
 }

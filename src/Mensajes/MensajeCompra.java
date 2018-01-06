@@ -1,29 +1,42 @@
 package Mensajes;
 
-import Utilidades.Utilidades;
+import General.Utilidades;
 
 public class MensajeCompra extends Mensaje{
-    protected String nombreCliente;
-    private String nombreEmpresa;
-    private double inversionMaxima;
+    protected double cantidadMaximaAInvertir;
 
-    public MensajeCompra(int identificador, String nombreCliente, String nombreEmpresa, double inversionMaxima) {
-        super(identificador);
-        this.nombreCliente = nombreCliente;
-        this.nombreEmpresa = nombreEmpresa;
-        this.inversionMaxima = inversionMaxima;
+
+    public MensajeCompra(int idOperacion, String nombreCliente, String dniCliente, String nombreEmpresa, TipoOperacion tipoOperacion) {//Constructor para ser llamado desde MensajeRespuestaCompra
+        super(idOperacion, nombreCliente, dniCliente, nombreEmpresa, tipoOperacion);
     }
 
-    protected MensajeCompra(int identificador, String nombreCliente) {  // Para MensajeRespuestaCompra
-        super(identificador);
-        this.nombreCliente = nombreCliente;
+    public MensajeCompra(int idOperacion, String nombreCliente, String dniCliente, String nombreEmpresa, TipoOperacion tipoOperacion, double cantidadMaximaAInvertir) {
+        super(idOperacion, nombreCliente, dniCliente, nombreEmpresa, tipoOperacion);
+        this.cantidadMaximaAInvertir = cantidadMaximaAInvertir;
     }
 
-    private String cadenaInversionMaxima() {
-        return Utilidades.formatoDinero(this.inversionMaxima); //Estamos usando un método estático
+    public MensajeCompra(int idOperacion, String nombreCliente, String dniCliente) {
+        super(idOperacion, nombreCliente, dniCliente);
+    }
+    public MensajeCompra(int idOperacion, String nombreCliente, String dniCliente, TipoOperacion tipoOperacion,Double cantidadMaximaAInvertir) {
+        super(idOperacion, nombreCliente, dniCliente,tipoOperacion);
+        this.cantidadMaximaAInvertir = cantidadMaximaAInvertir;
+    }
+
+
+    public double getCantidadMaximaAInvertir() {
+        return cantidadMaximaAInvertir;
+    }
+
+    protected String cadenaInversionMaxima() {
+        return Utilidades.formatoDinero(this.cantidadMaximaAInvertir); //Estamos usando un método estático
     }
 
     public String codificar() {
-        return cadenaIdentificador() + "|" + nombreCliente + "|" + nombreEmpresa + "|" + cadenaInversionMaxima();
+        return this.idOperacion + "|" + this.nombreCliente + "|" + this.dniCliente + "|" + this.nombreEmpresa + "|" + this.cadenaInversionMaxima()+"|";
     }
+
+    @Override
+    public String toString() {
+        return "IDoperacion: "+this.idOperacion+ ", Tipo: "+ this.tipoOperacion+", Nombre Cliente: "+ this.nombreCliente + ", Dni Cliente: "+ this.dniCliente + ", Nombre Empresa: "+this.nombreEmpresa + ", Importe a invertir: " + this.cantidadMaximaAInvertir+"\n" ;
 }

@@ -1,21 +1,51 @@
 package Mensajes;
 
-import Utilidades.Utilidades;
+import General.Utilidades;
+
 
 public class MensajeRespuestaVenta extends MensajeVenta {
-    private boolean operacionRealizada;
-    private double precioDeAccion;
-    private double beneficioTotal; //Coste de accion x numero de acciones vendidas
 
-    public MensajeRespuestaVenta(int identificador, String nombreCliente, boolean operacionRealizada, double precioDeAccion, double beneficioTotal) {
-        super(identificador, nombreCliente);
-        this.operacionRealizada = operacionRealizada;
-        this.precioDeAccion = precioDeAccion;
+    private boolean efectuada;
+    private double precioDeAccion;
+    private double beneficioTotal;
+    private double numAccionesVendidas;
+
+    public MensajeRespuestaVenta(int idOperacion, String nombreCliente, String dniCliente, String nombreEmpresa, TipoOperacion tipoOperacion, boolean efectuada) {
+        super(idOperacion, nombreCliente, dniCliente, nombreEmpresa, tipoOperacion);
+        this.efectuada = efectuada;
+
+    }
+    public MensajeRespuestaVenta(int idOperacion, String nombreCliente, String dniCliente, String nombreEmpresa, TipoOperacion tipoOperacion, boolean efectuada, double numAccionesVendidas,double precioDeAccion,double beneficioTotal) {
+        super(idOperacion, nombreCliente, dniCliente, nombreEmpresa, tipoOperacion, numAccionesVendidas);
+        this.efectuada = efectuada;
+        this.precioDeAccion=precioDeAccion;
         this.beneficioTotal = beneficioTotal;
+        this.numAccionesVendidas = numAccionesVendidas;
+    }
+
+    public MensajeRespuestaVenta(int identificador, String nombreCliente, String dniCliente, String nombreEmpresa,TipoOperacion tipoOperacion, double numTitulosAVender, boolean efectuada) {
+        super(identificador, nombreCliente, dniCliente, nombreEmpresa,tipoOperacion,numTitulosAVender);
+        this.efectuada = efectuada;
+    }
+
+    public boolean isEfectuada() {
+        return efectuada;
+    }
+
+    public double getPrecioDeAccion() {
+        return precioDeAccion;
+    }
+
+    public double getBeneficioTotal() {
+        return beneficioTotal;
+    }
+
+    public double getNumAccionesVendidas() {
+        return numAccionesVendidas;
     }
 
     private String cadenaOperacionRealizada() {
-        return String.valueOf(this.operacionRealizada);
+        return String.valueOf(this.efectuada);
     }
 
     private String cadenaPrecioDeAccion() {
@@ -26,7 +56,15 @@ public class MensajeRespuestaVenta extends MensajeVenta {
         return Utilidades.formatoDinero(this.beneficioTotal);
     }
 
+
     public String codificar() {
-        return cadenaIdentificador() + "|" + nombreCliente + "|" + cadenaOperacionRealizada() + "|" + cadenaPrecioDeAccion() + "|" + cadenaBeneficioTotal();
+        if (efectuada)         return this.cadenaIdentificador()+ "|" +this.nombreCliente+ "|" +this.dniCliente+ "|" + this.cadenaOperacionRealizada()+ "|" + this.cadenaPrecioDeAccion() + "|" + this.cadenaBeneficioTotal()+"|";
+        else  return this.cadenaIdentificador()+ "|" +this.nombreCliente+ "|" +this.dniCliente+ "|" + this.cadenaOperacionRealizada()+  "|";
+
     }
+
+
 }
+
+
+

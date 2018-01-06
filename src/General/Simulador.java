@@ -8,6 +8,7 @@ import Utilidades.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InvalidClassException;
 
 
 public class Simulador {
@@ -17,6 +18,7 @@ public class Simulador {
     private Banco banco;
     private int eleccion;
     private int constructorUtilizado;
+    private AgenteDeInversiones broker;
 
     public Simulador() {
         this.constructorUtilizado = 0;
@@ -55,11 +57,12 @@ public class Simulador {
         this.constructorUtilizado =6;
     }
 
-    public Simulador(InterfazDeUsuario menuYEleccion, BolsaDeValores bolsa, Banco banco) {
+    public Simulador(InterfazDeUsuario menuYEleccion, BolsaDeValores bolsa, Banco banco, AgenteDeInversiones broker) {
         interfaz = menuYEleccion;
         this.bolsa = bolsa;
         this.banco = banco;
         this.constructorUtilizado = 7;
+        this.broker= broker;
     }
 
     public void principal() throws ClassNotFoundException,IOException, BancoNoTieneGestor,ObjetoInterfazDeUsuarioNoPasadoConstructorSimulador,ClassCastException, IntentsLimitAchieveException, ObjetoEscannerNoPasadoConstructorInterfazDeUsuario {
@@ -125,10 +128,11 @@ public class Simulador {
                             System.out.println("Restauración realizada con exito.");
                         }
                         catch (FileNotFoundException fnfe) {
-                            System.out.println("La ruta indicada no existe.");
+
+                            System.out.println("EEROR: La ruta indicada no existe.");
                         }
                         catch (IOException ioe) {
-                            throw new IOException("Ruta correcta pero otro error de E/S");
+                           ioe.getStackTrace();
                         }
                         System.out.println();
                         break;
@@ -205,27 +209,60 @@ public class Simulador {
                             System.out.println("Restauración realizada con exito.");
                         }
                         catch (FileNotFoundException fnfe) {
-                            System.out.println("La ruta indicada no existe.");
+                            System.out.println("EEROR: La ruta indicada no existe.");
                         }
+
                         catch (IOException ioe) {
-                            throw new IOException("Ruta correcta pero otro error de E/S");
+
                         }
                         System.out.println();
                         break;
 
                     case 14:    //SOLICITAR COMPRA DE ACCIONES
+                        try {
+                            interfaz.solicitaCompraDeAcciones();
+                            banco.compraAcciones(interfaz.getDni(), interfaz.getNombreEmpresa(), interfaz.getCantidadMaxAInvertir());
+                        }
+                        catch(IntentsLimitAchieveException ile) {
+                            System.out.println("Se han superado el número de intentos permitidos");
+                            System.out.println();
+                        }
+
+
+
                         break;
 
                     case 15:    //SOLICITAR VENTA DE ACCIONES
+                        try {
+                            interfaz.solicitaVentaDeAcciones();
+                            banco.ventaAcciones(interfaz.getDni(), interfaz.getNombreEmpresa(), interfaz.getNumTitulosAVender());
+                        }
+                        catch(IntentsLimitAchieveException ile) {
+                            System.out.println("Se han superado el número de intentos permitidos");
+                            System.out.println();
+                        }
                         break;
 
                     case 16:    //SOLICITAR ACTUALIZACION DE VALORES DE LAS CARTERAS DE UN CLIENTE
+                        try {
+                            interfaz.actualizaValoresCliente();
+                            banco.actualizacionDeAccicones(interfaz.getDni());
+                        }
+                        catch ( IntentsLimitAchieveException ile){
+                            System.out.println("Se han superado el número de intentos permitidos");
+                            System.out.println();
+                        }
                         break;
 
                     case 17:    //IMPRIMIR OPERACIONES PENDIENTES
+                        interfaz.muestraOperacionesPendientes();
+                        broker.muestraOperacionesPendientes();
                         break;
 
                     case 18:    //EJECUTAR OPERACIONES PENDIENTES
+                        interfaz.ejecutaPeticionesDeAcciones();
+                        broker.ejecutaPeticionesDeAcciones();
+                        banco.actualizaEstadoClientes();//A partir de los resultados de las opraciones almacenadas en la lista opracionesRealizadas del broker tenemos que actualizar el/los paquete/s de acciones del cliente
                         break;
                 }
                 System.out.println();
