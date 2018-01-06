@@ -206,6 +206,28 @@ public class BolsaDeValores {
         }
     }
 
+    /*Nombre método: intentaOperacion
+      Entradas: String con la cadena codificada de compra o venta desde el broker
+      Salida: Salidas: String con una cadena codificada de respuesta de compra o venta con el resultado de la operación y los valores necesarios en funcion del tipo de operacion
+      Excepciones:
+      Descripcion: Clasifica la cadena en compra o venta y llama al submétodo indicado en cada caso
+     */
+
+    public String intentaOperacion(String mensajeCodificado) {
+        String[] partesMensaje = mensajeCodificado.split("|");
+        try {
+            if (partesMensaje[3].contains(",")) {   // En este caso es un mensaje de compra
+                return recepcioncadenaCodificadaCompraDesdeElBroker(mensajeCodificado);
+            }
+            else {  // Si no tiene el campo [3] una coma asumimos que hay un entero, mensaje de venta
+                return recepcioncadenaCodificadaVentaDesdeElBroker(mensajeCodificado);
+            }
+        }
+        catch (NullPointerException npe) {
+            // Codigo para devolver operacion fallida
+        }
+    }
+
     /*Nombre método: recepcioncadenaCodificadaCompraDesdeElBroker
       Entradas: String con la cadena codificade de compra desde el broker
       Salidas: String con una cadena codificada de respuesta de compra con el resultado de la operación y los valores necesarios en funcion del tipo de operacion
@@ -213,7 +235,7 @@ public class BolsaDeValores {
       Descripción: Dada la cadena codificada recibida desde el broker realiza:  decodifica, geenera un string de respuesta codificado (para ello tiene que hacer las operaciones de mirar el precio de la accion y realizar las operaciones necesarias y por ultimo actualiza los valores de la bolsa en funcion de si la orden era de compra o de venta
       */
 
-    public String recepcioncadenaCodificadaCompraDesdeElBroker(String cadenaCompraCodificada) {
+    private String recepcioncadenaCodificadaCompraDesdeElBroker(String cadenaCompraCodificada) {
 
         System.out.println(" -------------- ZONA BOLSA -------------");
         System.out.println();
@@ -394,7 +416,7 @@ public class BolsaDeValores {
       Descripción: Dada la cadena codificada recibida desde el broker realiza:  decodifica, geenera un string de respuesta codificado (para ello tiene que hacer las operaciones de mirar el precio de la accion y realizar las operaciones necesarias y por ultimo actualiza los valores de la bolsa en funcion de si la orden era de compra o de venta
       */
 
-    public String recepcioncadenaCodificadaVentaDesdeElBroker(String cadenaVentaCodificada) {
+    private String recepcioncadenaCodificadaVentaDesdeElBroker(String cadenaVentaCodificada) {
 
         System.out.println(" -------------- ZONA BOLSA -------------");
         System.out.println();
