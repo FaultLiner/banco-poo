@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba885ecd-d8ef-45dd-80f5-a05b96a251bf" name="Default" comment="Merge branches 'master' and 'pr/12' of https://github.com/FaultLiner/banco-poo into pr/12&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/banco-poo/Bolsa/BolsaDeValores.class&#10;#&#9;out/production/banco-poo/Bolsa/Empresa.class&#10;#&#9;out/production/banco-poo/General/InterfazDeUsuario.class&#10;#&#9;out/production/banco-poo/General/Simulador.class&#10;#&#9;src/Utilidades/Utilidades.java">
+    <list default="true" id="ba885ecd-d8ef-45dd-80f5-a05b96a251bf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bolsa/BolsaDeValores.java" afterPath="$PROJECT_DIR$/src/Bolsa/BolsaDeValores.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Utilidades/Utilidades.java" afterPath="$PROJECT_DIR$/src/Utilidades/Utilidades.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,16 +14,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/company/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Mensaje.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mensajes/Mensaje.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -39,7 +27,7 @@
       <file leaf-file-name="MensajeActualizacion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mensajes/MensajeActualizacion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="68">
               <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
               <folding />
             </state>
@@ -59,7 +47,7 @@
       <file leaf-file-name="MensajeRespuestaActualizacion.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Mensajes/MensajeRespuestaActualizacion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="68">
               <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
               <folding />
             </state>
@@ -94,7 +82,7 @@
       <file leaf-file-name="Utilidades.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Utilidades/Utilidades.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="119">
               <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="65" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -106,7 +94,7 @@
       <file leaf-file-name="Utilidades.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/General/Utilidades.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="323">
               <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -118,8 +106,8 @@
       <file leaf-file-name="BolsaDeValores.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Bolsa/BolsaDeValores.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="237" column="19" lean-forward="false" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+            <state relative-caret-position="221">
+              <caret line="222" column="34" lean-forward="false" selection-start-line="222" selection-start-column="34" selection-end-line="222" selection-end-column="34" />
               <folding>
                 <element signature="method#recepcioncadenaCodificadaVentaDesdeElBroker#0;class#BolsaDeValores#0" expanded="false" />
               </folding>
@@ -127,11 +115,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntentsLimitAchieveException.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ExcepcionesPropias/IntentsLimitAchieveException.java">
+      <file leaf-file-name="AgenteDeInversiones.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Banco/AgenteDeInversiones.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="-1573">
+              <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+              <folding>
+                <element signature="e#32031#32040#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Banco.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Banco/Banco.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -195,10 +195,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,6 +207,12 @@
               <item name="banco-poo" type="b2602c69:ProjectViewProjectNode" />
               <item name="banco-poo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="banco-poo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="banco-poo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Banco" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="banco-poo" type="b2602c69:ProjectViewProjectNode" />
@@ -251,163 +254,13 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.externalResources" />
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.DS_Store</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/AgenteDeInversiones.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/Banco.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/Cliente.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/ClientePremium.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/PaqueteDeAcciones.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Bolsa/BolsaDeValores.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Bolsa/Empresa.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/General/InterfazDeUsuario.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/General/Simulador.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/General/Utilidades.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/Mensaje.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeActualizacion.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeCompra.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeRespuestaActualizacion.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeRespuestaCompra.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeRespuestaVenta.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/MensajeVenta.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/com/company/Main.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/AgenteDeInversiones.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/Banco.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/Cliente.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/ClientePremium.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/PaqueteDeAcciones.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bolsa/BolsaDeValores.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Bolsa/Empresa.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/General/InterfazDeUsuario.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/General/Simulador.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/General/Utilidades.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/Mensaje.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeActualizacion.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeCompra.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeRespuestaActualizacion.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeRespuestaCompra.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeRespuestaVenta.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/MensajeVenta.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/company/Main.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Mensajes/TipoOperacion.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Mensajes/TipoOperacion.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/clientes.ser</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/empresas.ser</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/Simulador/Banco/GestorDeInversiones.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Banco/GestorDeInversiones.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -556,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1514729626179</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="He hecho un gran merge de todo e implementado la clasificación desde la bolsa. No he encontrado usos que cambiar, me imagino que el broker lo usará">
+      <created>1515264732478</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1515264732478</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -575,8 +435,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22228146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22441365" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -589,6 +448,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -597,7 +457,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="pequeños retoques" />
     <MESSAGE value="Merge branches 'master' and 'pr/12' of https://github.com/FaultLiner/banco-poo into pr/12&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/banco-poo/Bolsa/BolsaDeValores.class&#10;#&#9;out/production/banco-poo/Bolsa/Empresa.class&#10;#&#9;out/production/banco-poo/General/InterfazDeUsuario.class&#10;#&#9;out/production/banco-poo/General/Simulador.class&#10;#&#9;src/Utilidades/Utilidades.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branches 'master' and 'pr/12' of https://github.com/FaultLiner/banco-poo into pr/12&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;out/production/banco-poo/Bolsa/BolsaDeValores.class&#10;#&#9;out/production/banco-poo/Bolsa/Empresa.class&#10;#&#9;out/production/banco-poo/General/InterfazDeUsuario.class&#10;#&#9;out/production/banco-poo/General/Simulador.class&#10;#&#9;src/Utilidades/Utilidades.java" />
+    <MESSAGE value="He hecho un gran merge de todo e implementado la clasificación desde la bolsa. No he encontrado usos que cambiar, me imagino que el broker lo usará" />
+    <option name="LAST_COMMIT_MESSAGE" value="He hecho un gran merge de todo e implementado la clasificación desde la bolsa. No he encontrado usos que cambiar, me imagino que el broker lo usará" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -972,7 +833,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Mensajes/MensajeActualizacion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="68">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
@@ -980,7 +841,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Mensajes/MensajeRespuestaActualizacion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
+        <state relative-caret-position="68">
           <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
@@ -1011,7 +872,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Utilidades/Utilidades.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="119">
           <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1021,7 +882,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/General/Utilidades.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="323">
           <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1029,10 +890,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banco/Banco.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Banco/AgenteDeInversiones.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1573">
+          <caret line="11" column="13" lean-forward="false" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+          <folding>
+            <element signature="e#32031#32040#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Bolsa/BolsaDeValores.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="237" column="19" lean-forward="false" selection-start-line="237" selection-start-column="19" selection-end-line="237" selection-end-column="19" />
+        <state relative-caret-position="221">
+          <caret line="222" column="34" lean-forward="false" selection-start-line="222" selection-start-column="34" selection-end-line="222" selection-end-column="34" />
           <folding>
             <element signature="method#recepcioncadenaCodificadaVentaDesdeElBroker#0;class#BolsaDeValores#0" expanded="false" />
           </folding>
