@@ -33,7 +33,12 @@ public class MensajeCompra extends Mensaje{
     }
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "IDoperacion: "+this.idOperacion+ ", Tipo: "+ this.tipoOperacion+", Nombre Cliente: "+ this.nombreCliente + ", Dni Cliente: "+ this.dniCliente + ", Nombre Empresa: "+this.nombreEmpresa + ", Importe a invertir: " + Utilidades.formatoDinero(this.cantidadMaximaAInvertir)+"\n" ;
     }
     //FIN ZONA DE METODOS PUBLICOS
+=======
+        return "IDoperacion: " + this.idOperacion + ", Tipo: " + this.tipoOperacion + ", Nombre Cliente: " + this.nombreCliente + ", Dni Cliente: " + this.dniCliente + ", Nombre Empresa: " + this.nombreEmpresa + ", Importe a invertir: " + this.cantidadMaximaAInvertir + "\n";
+    }
+>>>>>>> master
 }
