@@ -17,6 +17,7 @@ public class BolsaDeValores {
     //ZONA DE VARIABLES
     private String nombre;
     private HashSet<Empresa> empresas;
+    private int CAMPO_DIFERENCIADOR;
     // FIN ZONA VALIABLES
 
     //ZONA DE CONSTRUCTORES
@@ -216,10 +217,10 @@ public class BolsaDeValores {
     public String intentaOperacion(String mensajeCodificado) {
         String[] partesMensaje = mensajeCodificado.split("|");
         try {
-            if (partesMensaje[3].contains(",")) {   // En este caso es un mensaje de compra
+            if (partesMensaje[CAMPO_DIFERENCIADOR].contains(",")) {   // En este caso es un mensaje de compra
                 return recepcioncadenaCodificadaCompraDesdeElBroker(mensajeCodificado);
             }
-            else {  // Si no tiene el campo [3] una coma asumimos que hay un entero, mensaje de venta
+            else {  // Si no tiene el campo [4] una coma asumimos que hay un entero, mensaje de venta
                 return recepcioncadenaCodificadaVentaDesdeElBroker(mensajeCodificado);
             }
         }

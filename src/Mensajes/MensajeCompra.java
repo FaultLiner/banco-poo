@@ -38,5 +38,6 @@ public class MensajeCompra extends Mensaje{
 
     @Override
     public String toString() {
-        return "IDoperacion: "+this.idOperacion+ ", Tipo: "+ this.tipoOperacion+", Nombre Cliente: "+ this.nombreCliente + ", Dni Cliente: "+ this.dniCliente + ", Nombre Empresa: "+this.nombreEmpresa + ", Importe a invertir: " + this.cantidadMaximaAInvertir+"\n" ;
+        return "IDoperacion: " + this.idOperacion + ", Tipo: " + this.tipoOperacion + ", Nombre Cliente: " + this.nombreCliente + ", Dni Cliente: " + this.dniCliente + ", Nombre Empresa: " + this.nombreEmpresa + ", Importe a invertir: " + this.cantidadMaximaAInvertir + "\n";
+    }
 }
